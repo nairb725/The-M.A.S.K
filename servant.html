@@ -7,11 +7,18 @@
 		<title>Document</title>
 	</head>
 	<body>
-		<img src="crepe.png" alt="" />
+		<img src="crepe.png" alt="" id="krep" />
 	</body>
 	<script>
+		let img = document.getElementById("krep");
 		document.addEventListener("click", function (e) {
 			console.log("test");
+			const randomSign = () => Math.sign(Math.random() - 0.5);
+			let randAngle = Math.floor(Math.random() * 10) * randomSign(); // random degrees
+
+			let randPosX = Math.random() * 2 * randomSign();
+			let randPosY = Math.random() * 2 * randomSign();
+			img.style.transform = "rotate(" + randAngle + "deg) translate(" + randPosX + "%, " + randPosY + "%)";
 		});
 	</script>
 </html>
