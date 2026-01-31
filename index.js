@@ -10,7 +10,7 @@ const io = new Server(server);
 const connectedPlayers = new Map();
 
 app.get("/", (req, res) => {
-	res.sendFile(join(__dirname, "pages/index.html"));
+	res.sendFile(join(__dirname, "index.html"));
 });
 
 app.get("/master", (req, res) => {

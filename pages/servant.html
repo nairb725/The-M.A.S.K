@@ -14,6 +14,8 @@
 	<script>
 		const socket = io();
 		let img = document.getElementById("krep");
+		let crepeLeft = 10;
+		let crepeStatus = 1; 
 
 		const urlParams = new URLSearchParams(window.location.search);
 		const name = urlParams.get("name");
