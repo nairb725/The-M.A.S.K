@@ -9,8 +9,10 @@ const server = createServer(app);
 const io = new Server(server);
 const port = process.env.PORT || 3000;
 
-const connectedPlayers = [];
+let connectedPlayers = [];
+let lastGameStat = [];
 const objective = 1000;
+let isGamePlaying = false;
 
 app.use(express.static(__dirname));
 
@@ -38,7 +40,13 @@ io.on("connection", (socket) => {
 		io.emit("updatePlayerList", connectedPlayers);
 	});
 
-	socket.on("start", () => io.emit("startGame"));
+	socket.on("start", () => {
+		isGamePlaying = true;
+		io.emit("startGame");
+	});
+	socket.on("isStarted", () => {
+		if (isGamePlaying) io.emit("startGame");
+	});
 
 	socket.on("addScore", () => {
 		console.log("Add score to", socket.id);
@@ -50,7 +58,9 @@ io.on("connection", (socket) => {
 			objective--;
 			connectedPlayers[index] = { id: socket.id, name: connectedPlayers[index].name, score: connectedPlayers[index].score++ };
 			if (objective <= 0) {
+				lastGameStat = connectedPlayers.sort((e1, e2) => e1 < e2);
 				io.emit("endGame");
+				isGamePlaying = false;
 			}
 		}
 
