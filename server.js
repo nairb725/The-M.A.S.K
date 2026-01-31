@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
 		console.log("user disconnected:", socket.id);
 
 		const index = connectedPlayers.findIndex((e) => {
-			e.id == socket.id;
+			return e.id == socket.id;
 		});
 		if (index > -1) {
 			// only splice array when item is found
