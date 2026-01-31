@@ -84,6 +84,7 @@ io.on("connection", (socket) => {
 			io.emit("endGame", currentDate);
 			console.log("before write" );
 			fs.writeFile(pathArchive + "/" + currentDate + ".json", JSON.stringify(dataToSave), () => {
+				console.log("In write" );
 				isGamePlaying = false;
 				firstEater = null;
 			});
