@@ -64,7 +64,6 @@ io.on("connection", (socket) => {
 		const index = connectedPlayers.findIndex((e) => {
 			return e.id == socket.id;
 		});
-		console.log(index);
 		if (index <= -1) return;
 
 		const currentPlayer = connectedPlayers[index];
@@ -88,7 +87,6 @@ io.on("connection", (socket) => {
 				firstEater = null;
 			});
 		}
-		console.log(connectedPlayers);
 	});
 
 	socket.on("disconnect", () => {
