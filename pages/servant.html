@@ -65,6 +65,9 @@
 	socket.on("startGame", ()=> {
 		isplaying = true;
 	});
+	socket.on("endGame", ()=> {
+		window.location.href("stat.html");
+	});
 
 	document.addEventListener("click", click);
 </script>
