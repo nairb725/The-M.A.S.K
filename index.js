@@ -12,11 +12,11 @@ const connectedPlayers = new Map();
 app.use(express.static(__dirname));
 
 app.get("/", (req, res) => {
-	res.sendFile(join(__dirname, "index.html"));
+	res.sendFile(join(__dirname, "pages/index.html"));
 });
 
 app.get("/master", (req, res) => {
-	res.sendFile(join(__dirname, "manager.html"));
+	res.sendFile(join(__dirname, "pages/manager.html"));
 });
 
 app.get("/minion", (req, res) => {
