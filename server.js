@@ -1,4 +1,5 @@
 const express = require("express");
+const { disconnect } = require("node:cluster");
 const { createServer } = require("node:http");
 const { join } = require("node:path");
 const { Server } = require("socket.io");
@@ -8,7 +9,7 @@ const server = createServer(app);
 const io = new Server(server);
 const port = process.env.PORT || 3000;
 
-const connectedPlayers = new Map();
+const connectedPlayers = [];
 
 app.use(express.static(__dirname));
 
@@ -31,17 +32,36 @@ io.on("connection", (socket) => {
 		console.log("Pseudo reçu:", name);
 		socket.username = name;
 
-		connectedPlayers.set(socket.id, name);
+		connectedPlayers.push({ id: socket.id, name, score: 0 });
 
-		io.emit("updatePlayerList", Array.from(connectedPlayers.values()));
+		io.emit("updatePlayerList", connectedPlayers);
+	});
+
+	socket.on("addScore", () => {
+		console.log("Add score to", socket.id);
+
+		const index = connectedPlayers.findIndex((e) => {
+			e.id == socket.id;
+		});
+		if (index > -1) {
+			connectedPlayers[index] = { id: socket.id, name: connectedPlayers[index].name, score: connectedPlayers[index].score++ };
+		}
+
+		io.emit("updatePlayerScore", connectedPlayers[index]);
 	});
 
 	socket.on("disconnect", () => {
 		console.log("user disconnected:", socket.id);
 
-		connectedPlayers.delete(socket.id);
+		const index = connectedPlayers.findIndex((e) => {
+			e.id == socket.id;
+		});
+		if (index > -1) {
+			// only splice array when item is found
+			connectedPlayers.splice(index, 1); // 2nd parameter means remove one item only
+		}
 
-		io.emit("updatePlayerList", Array.from(connectedPlayers.values()));
+		io.emit("updatePlayerList", connectedPlayers);
 	});
 });
 
