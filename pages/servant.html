@@ -240,7 +240,7 @@
 	});
 	socket.on("endGame", (currentDate) => {
 		isplaying = false;
-		window.location.href("/stats?id=" + socket.id + "&currentDate=" + currentDate);
+		window.location.href = "/stats?id=" + socket.id + "&currentDate=" + currentDate;
 	});
 
 	document.addEventListener("click", click);

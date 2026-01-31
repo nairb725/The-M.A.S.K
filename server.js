@@ -10,7 +10,7 @@ const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 let connectedPlayers = [];
-const objective = 15;
+let objective = 15;
 let isGamePlaying = false;
 let pathArchive = "archive/";
 let firstEater = null;
@@ -62,15 +62,19 @@ io.on("connection", (socket) => {
 
 	socket.on("addScore", () => {
 		const index = connectedPlayers.findIndex((e) => {
-			e.id == socket.id;
+			return e.id == socket.id;
 		});
+		console.log(index);
 		if (index <= -1) return;
 
 		const currentPlayer = connectedPlayers[index];
 		if (firstEater == null) firstEater = currentPlayer;
 
 		objective--;
-		connectedPlayers[index] = { id: socket.id, name: currentPlayer.name, score: currentPlayer.score++ };
+		connectedPlayers[index] = { id: socket.id, name: currentPlayer.name, score: currentPlayer.score + 1 };
+
+		io.emit("updatePlayerScore", connectedPlayers[index]);
+
 		if (objective <= 0) {
 			const dataToSave = {
 				firstEater,
@@ -79,12 +83,12 @@ io.on("connection", (socket) => {
 			};
 			const currentDate = Date.now();
 			io.emit("endGame", currentDate);
-			fs.writeFile(pathArchive + "/" + currentDate + ".json", JSON.stringify(dataToSave));
-			isGamePlaying = false;
-			firstEater = null;
+			fs.writeFile(pathArchive + "/" + currentDate + ".json", JSON.stringify(dataToSave), () => {
+				isGamePlaying = false;
+				firstEater = null;
+			});
 		}
-
-		io.emit("updatePlayerScore", connectedPlayers[index]);
+		console.log(connectedPlayers);
 	});
 
 	socket.on("disconnect", () => {
