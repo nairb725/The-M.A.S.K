@@ -10,6 +10,7 @@ const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 const connectedPlayers = [];
+const objective = 1000;
 
 app.use(express.static(__dirname));
 
@@ -46,7 +47,11 @@ io.on("connection", (socket) => {
 			e.id == socket.id;
 		});
 		if (index > -1) {
+			objective--;
 			connectedPlayers[index] = { id: socket.id, name: connectedPlayers[index].name, score: connectedPlayers[index].score++ };
+			if (objective <= 0) {
+				io.emit("endGame");
+			}
 		}
 
 		io.emit("updatePlayerScore", connectedPlayers[index]);
