@@ -10,11 +10,11 @@ const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 let connectedPlayers = [];
-let lastGameStat = [];
 const objective = 1000;
 let isGamePlaying = false;
 let pathArchive = "archive/";
 let firstEater = null;
+var fs = require("fs");
 
 app.use(express.static(__dirname));
 
@@ -28,6 +28,12 @@ app.get("/master", (req, res) => {
 
 app.get("/minion", (req, res) => {
 	res.sendFile(join(__dirname, "pages/servant.html"));
+});
+
+app.get("/result", (req, res) => {
+	fs.readFile(pathArchive + "/" + req.query.currentDate + ".json", "utf-8", (err, data) => {
+		res.status(200).json(JSON.parse(data));
+	});
 });
 
 app.get("/stats", (req, res) => {
@@ -55,26 +61,27 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("addScore", () => {
-		console.log("Add score to", socket.id);
-
 		const index = connectedPlayers.findIndex((e) => {
 			e.id == socket.id;
 		});
-		if (index > -1) {
-			objective--;
-			connectedPlayers[index] = { id: socket.id, name: connectedPlayers[index].name, score: connectedPlayers[index].score++ };
-			if (objective <= 0) {
-				const dataToSave = {
-					firstEater,
-					lastEater: connectedPlayers[index],
-					resumeGame: connectedPlayers,
-				};
-				io.emit("endGame");
-				var dictstring = JSON.stringify(dataToSave);
-				var fs = require("fs");
-				fs.writeFile(pathArchive + "/" + Date.now() + ".json", dictstring);
-				isGamePlaying = false;
-			}
+		if (index <= -1) return;
+
+		const currentPlayer = connectedPlayers[index];
+		if (firstEater == null) firstEater = currentPlayer;
+
+		objective--;
+		connectedPlayers[index] = { id: socket.id, name: currentPlayer.name, score: currentPlayer.score++ };
+		if (objective <= 0) {
+			const dataToSave = {
+				firstEater,
+				lastEater: currentPlayer,
+				resumeGame: connectedPlayers,
+			};
+			const currentDate = Date.now();
+			io.emit("endGame", currentDate);
+			fs.writeFile(pathArchive + "/" + currentDate + ".json", JSON.stringify(dataToSave));
+			isGamePlaying = false;
+			firstEater = null;
 		}
 
 		io.emit("updatePlayerScore", connectedPlayers[index]);
