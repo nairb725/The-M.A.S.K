@@ -7,28 +7,46 @@
 		<title>Document</title>
 	</head>
 	<body class="center">
-		<img src="../img/crepe.png" alt="" id="krep" />
+		<img src="../img/crepe1.png" alt="" id="krep" />
 	</body>
-
 	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-	<script>
-		const socket = io();
-		let img = document.getElementById("krep");
-		let crepeLeft = 10;
-		let crepeStatus = 1;
+<script>
+	const socket = io();
+	let img = document.getElementById("krep");
+	let crepeStatus = 1;
+	let crepeGiraffeProba = false;
 
-		const urlParams = new URLSearchParams(window.location.search);
-		const name = urlParams.get("name");
-		socket.emit("playerName", name);
+	const urlParams = new URLSearchParams(window.location.search);
+	const name = urlParams.get("name");
+	socket.emit("playerName", name);
 
-		document.addEventListener("click", function (e) {
-			console.log("test");
-			const randomSign = () => Math.sign(Math.random() - 0.5);
-			let randAngle = Math.floor(Math.random() * 10) * randomSign(); // random degrees
+	function setup(){
 
-			let randPosX = Math.random() * 2 * randomSign();
-			let randPosY = Math.random() * 2 * randomSign();
-			img.style.transform = "rotate(" + randAngle + "deg) translate(" + randPosX + "%, " + randPosY + "%)";
-		});
-	</script>
+	}
+
+	function click() {
+		crepeStatus++;
+		console.log('crepeStatus');
+
+		if (crepeStatus > 4) {
+			crepeStatus = 1;
+			crepeGiraffeProba = Math.random() < 1 / 8;
+		}
+
+		img.src = crepeGiraffeProba
+			? "../img/crepegiraffe" + crepeStatus + ".png"
+			: "../img/crepe" + crepeStatus + ".png";
+			console.log(img.src);
+
+		const randomSign = () => (Math.random() < 0.5 ? -1 : 1);
+		const randAngle = Math.floor(Math.random() * 10) * randomSign();
+		const randPosX = Math.random() * 2 * randomSign();
+		const randPosY = Math.random() * 2 * randomSign();
+
+		img.style.transform =
+			`rotate(${randAngle}deg) translate(${randPosX}%, ${randPosY}%)`;
+	}
+
+	document.addEventListener("click", click);
+</script>
 </html>
