@@ -3,7 +3,10 @@ body {
   background-color: #1a1a1a;
   color: #fff;
   font-family: Comic Sans MS;
-  padding: 20px;
+  padding-top: 0%;
+  padding-bottom: 0%;  
+  padding-left: 5%;
+  padding-right: 5%;
   margin: 0;
   height: 100vh;
 
@@ -96,7 +99,6 @@ h2 {
 }
 
 body div.header {
-  display: flex;
   justify-content: space-between;
   align-items: center;
 }
@@ -137,4 +139,62 @@ body div.header {
     transform: translate(-50%, -50%);
     font-size: 50px;
   }
+}
+.bodyStat {
+  max-width: 900px;
+  margin: auto;
+  padding: 16px;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* POSITION AU MILIEU */
+.position-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.result-pos {
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-align: center;
+  padding-top: 5% ;
+  padding-bottom: 5% ;
+}
+
+/* CONTENEURS DES RESULTATS */
+.container {
+  color: #1a1a1a;
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* RESULTATS */
+.result {
+  flex: 1;
+  padding: 5%;
+  background: #f3f3f3;
+  border-radius: 8px;
+  text-align: center;
+  margin: 5%;
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .result-pos {
+    text-align: center;
+  }
+}
+.titre{
+  width: ;
 }
