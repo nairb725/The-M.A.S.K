@@ -54,12 +54,18 @@
 				playerListElement.innerHTML = "";
 				playerCountElement.textContent = players.length;
 
-				players.forEach((playerName) => {
+				players.forEach((player) => {
 					const li = document.createElement("li");
-					li.textContent = playerName;
+					li.id = player.id;
+					li.innerHTML = `<div id="${player.id}-name">${player.name}</div><div id="${player.id}-score">${player.score}</div>`;
 
 					playerListElement.appendChild(li);
 				});
+			});
+
+			socket.on("updatePlayerScore", (player) => {
+				const e = document.getElementById(`${player.id}-score`);
+				e.innerHTML = player.score;
 			});
 
 			const start = () => {
