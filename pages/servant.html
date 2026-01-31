@@ -240,10 +240,9 @@ function getDate(){
 	socket.on("startGame", () => {
 		isplaying = true;
 	});
-	socket.on("endGame", () => {
+	socket.on("endGame", (currentDate) => {
 		isplaying = false;
-		getDate();
-		window.location.href("/stats?id=" + socket.id, + "&date=" + date);
+		window.location.href("/stats?id=" + socket.id + "&currentDate=" + currentDate);
 	});
 
 	document.addEventListener("click", click);
