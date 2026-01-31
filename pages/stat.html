@@ -1,66 +1,92 @@
 <!doctype html>
 <html>
-	<head>
-		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-		<title>The M.A.S.K - Minions</title>
-		<link rel="stylesheet" href="../styles/style.css" />
-		<style>
-			#playerList {
-				list-style: none;
-				padding: 0;
-			}
 
-			#playerList li {
-				background-color: #2d2d2d;
-				margin: 10px 0;
-				padding: 15px;
-				border-radius: 5px;
-				border-left: 4px solid #ff6b6b;
-			}
-			#position {
-				color: #ff6b6b;
-			}
-		</style>
-	</head>
-	<div class="bodyStat">
-		<div class="header">
-			<div>
-				<h1 class="titre">🎭 The M.A.S.K</h1>
-			</div>
-		</div>
-		<div>
-			<div class="result-pos">
-				Position :
-				<div id="self-position">1er</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="result">
-				Le plus Gourmand :
-				<div id="most-score">c'est jean</div>
-			</div>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>The M.A.S.K - Minions</title>
+    <link rel="stylesheet" href="../styles/style.css" />
+    <style>
+        #playerList {
+            list-style: none;
+            padding: 0;
+        }
 
-			<div class="result">
-				Première crêpes :
-				<div id="first-eater">c'est jean</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="result">
-				Dernière crêpes :
-				<div id="last-eater">c'est jean</div>
-			</div>
+        #playerList li {
+            background-color: #2d2d2d;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ff6b6b;
+        }
 
-			<div class="result">
-				Le moins Gourmand :
-				<div id="worst-score">c'est jean</div>
-			</div>
-		</div>
-		<div class="container button-menu">
-			<input type="button" class="button-return" onclick="location.href = '/'" value="Return to Menu" />
-		</div>
-	</div>
-	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
-    <script>
-    </script>
+        #position {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+<div class="bodyStat">
+    <div class="header">
+        <div>
+            <h1 class="titre">🎭 The M.A.S.K</h1>
+        </div>
+    </div>
+    <div>
+        <div class="result-pos">
+            Position :
+            <div id="self-position">1er</div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="result">
+            Le plus Gourmand :
+            <div id="most-score"></div>
+        </div>
+
+        <div class="result">
+            Première crêpes :
+            <div id="first-eater"></div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="result">
+            Dernière crêpes :
+            <div id="last-eater"></div>
+        </div>
+
+        <div class="result">
+            Le moins Gourmand :
+            <div id="worst-score"></div>
+        </div>
+    </div>
+    <div class="container button-menu">
+        <input type="button" class="button-return" onclick="location.href = '/'" value="Return to Menu" />
+    </div>
+</div>
+<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+<script>
+        let searchId = new URLSearchParams(location.search);
+        let currentDate = searchId.get('currentDate');
+        let id = searchId.get('id');
+ 
+    fetch(`/result?currentDate=${date}`)
+        .then((res) => res.json())
+        .then((dataToSave) => {
+            let resume = dataToSave.resumeGame;
+            resumeGame.sort((a,b) =>{
+                return a.score > b.score;
+            })
+            const firstEater = document.getElementById("first-eater");
+            firstEater.textContent = dataToSave.firstEater.name;
+            const lastEater = document.getElementById("last-eater");
+            lastEater.textContent =  dataToSave.lastEater.name
+            const mostScore = document.getElementById("most-score");
+            mostScore.textContent =  resume[resume.lenght-1].name
+            const worstScore = document.getElementById("worst-score");
+            worstScore.textContent =  resume[0].name
+            resume.findIndex((e) =>{
+                return e.id == id
+            })
+        })
+</script>
+
 </html>

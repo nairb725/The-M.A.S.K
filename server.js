@@ -10,7 +10,7 @@ const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 let connectedPlayers = [];
-const objective = 1000;
+const objective = 15;
 let isGamePlaying = false;
 let pathArchive = "archive/";
 let firstEater = null;
