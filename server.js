@@ -10,6 +10,8 @@ const port = process.env.PORT || 3000;
 
 const connectedPlayers = new Map();
 
+app.use(express.static(__dirname));
+
 app.get("/", (req, res) => {
 	res.sendFile(join(__dirname, "index.html"));
 });
