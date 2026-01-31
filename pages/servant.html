@@ -234,13 +234,16 @@
 		}
 
 	}
-
+function getDate(){
+	const date = new Date();
+}
 	socket.on("startGame", () => {
 		isplaying = true;
 	});
 	socket.on("endGame", () => {
 		isplaying = false;
-		window.location.href("/stats?id=" + socket.id);
+		getDate();
+		window.location.href("/stats?id=" + socket.id, + "&date=" + date);
 	});
 
 	document.addEventListener("click", click);
