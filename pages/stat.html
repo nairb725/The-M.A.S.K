@@ -3,7 +3,7 @@
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 		<title>The M.A.S.K - Minions</title>
-        <link rel="stylesheet" href="../styles/style.css" />
+		<link rel="stylesheet" href="../styles/style.css" />
 		<style>
 			#playerList {
 				list-style: none;
@@ -17,46 +17,48 @@
 				border-radius: 5px;
 				border-left: 4px solid #ff6b6b;
 			}
-            #position{
-                color: #ff6b6b;
-            }
+			#position {
+				color: #ff6b6b;
+			}
 		</style>
 	</head>
-    <div class="bodyStat">
+	<div class="bodyStat">
 		<div class="header">
 			<div>
 				<h1 class="titre">🎭 The M.A.S.K</h1>
 			</div>
-        </div>
-        <div>
-            <div class="result-pos">Position : 
-                <div>1er</div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="result">Le plus de croc : 
-                <div>c'est jean</div>
-            </div>
-            
-            <div class="result">Le premier à avoir croquer : 
-                <div>c'est jean</div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="result">Le dernier à avoir croquer : 
-                <div>c'est jean</div>
-            </div>
-        
-            <div class="result">Celui qui à le moins croquer : 
-                <div>c'est jean</div>
-            </div>
-        </div>
-        <div class="container button-menu">
-            <input type="button" class="button-return" onclick="location.href='/';" value="Return to Menu" />
-        </div>
-        </div>
-        </div>
-    </div>
-    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+		</div>
+		<div>
+			<div class="result-pos">
+				Position :
+				<div id="self-position">1er</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="result">
+				Le plus Gourmand :
+				<div id="most-score">c'est jean</div>
+			</div>
 
-    </html>
+			<div class="result">
+				Première crêpes :
+				<div id="first-eater">c'est jean</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="result">
+				Dernière crêpes :
+				<div id="last-eater">c'est jean</div>
+			</div>
+
+			<div class="result">
+				Le moins Gourmand :
+				<div id="worst-score">c'est jean</div>
+			</div>
+		</div>
+		<div class="container button-menu">
+			<input type="button" class="button-return" onclick="location.href = '/'" value="Return to Menu" />
+		</div>
+	</div>
+	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+</html>

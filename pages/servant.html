@@ -240,7 +240,7 @@
 	});
 	socket.on("endGame", () => {
 		isplaying = false;
-		window.location.href("stat.html");
+		window.location.href("/stats?id=" + socket.id);
 	});
 
 	document.addEventListener("click", click);

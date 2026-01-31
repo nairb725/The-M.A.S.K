@@ -30,6 +30,10 @@ app.get("/minion", (req, res) => {
 	res.sendFile(join(__dirname, "pages/servant.html"));
 });
 
+app.get("/stats", (req, res) => {
+	res.sendFile(join(__dirname, "pages/stat.html"));
+});
+
 io.on("connection", (socket) => {
 	console.log("a user connected:", socket.id);
 
