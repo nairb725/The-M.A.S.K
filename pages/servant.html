@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="../styles/style.css" />
 		<title>Document</title>
 	</head>
-	<body>
+	<body class="center">
 		<img src="../img/crepe.png" alt="" id="krep" />
 	</body>
 
@@ -15,7 +15,7 @@
 		const socket = io();
 		let img = document.getElementById("krep");
 		let crepeLeft = 10;
-		let crepeStatus = 1; 
+		let crepeStatus = 1;
 
 		const urlParams = new URLSearchParams(window.location.search);
 		const name = urlParams.get("name");

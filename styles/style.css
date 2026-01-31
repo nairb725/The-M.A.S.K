@@ -1,15 +1,22 @@
 body {
+  background-color: #1a1a1a;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  padding: 20px;
   margin: 0;
   height: 100vh;
+
+  transition-duration: 0.4s;
+}
+
+body.center {
   display: flex;
   justify-content: center;
   overflow: hidden;
-
-  transition-duration: 0.4s;
   user-select: none;
 }
 
-body img {
+body.center img {
   max-width: 100%;
   max-height: 100%;
   aspect-ratio: 1 / 1;
@@ -18,7 +25,7 @@ body img {
   transition: all 0.3s ease-in-out;
 }
 
-body:after {
+body.center:after {
   content: "";
   background: #ffffffaa;
   display: block;
@@ -31,7 +38,21 @@ body:after {
   transition: all 0.4s;
 }
 
-body:active:after {
+body.center:active:after {
   opacity: 1;
   transition: 0s;
+}
+
+h1 {
+  color: #ff6b6b;
+  font-size: 3em;
+}
+
+h2 {
+  color: #ffd93d;
+}
+
+.hidden {
+  opacity: 0;
+  height: 0;
 }
