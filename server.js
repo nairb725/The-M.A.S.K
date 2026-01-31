@@ -37,6 +37,8 @@ io.on("connection", (socket) => {
 		io.emit("updatePlayerList", connectedPlayers);
 	});
 
+	socket.on("start", () => io.emit("startGame"));
+
 	socket.on("addScore", () => {
 		console.log("Add score to", socket.id);
 
