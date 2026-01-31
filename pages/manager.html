@@ -20,14 +20,19 @@
 		</style>
 	</head>
 	<body>
-		<h1>🎭 Minions de The M.A.S.K</h1>
-		<h2>Minions connectés: <span id="playerCount">0</span></h2>
-		<button onclick="openPopup()">QR Code</button>
+		<div class="header">
+			<div>
+				<h1>🎭 Minions de The M.A.S.K</h1>
+				<h2>Minions connectés: <span id="playerCount">0</span></h2>
+			</div>
+			<button onclick="openPopup()" style="border-radius: 50px">QR Code</button>
+		</div>
 		<ul id="playerList"></ul>
 
-		<div class="popup hidden" id="popup-qr-code">
+		<div class="popup hidden" id="popup-qr-code" onclick="openPopup()">
 			<div class="popup-container">
-				<div>content</div>
+				<img src="../img/QRCode.png" />
+				<h2>Join The M.A.S.K.</h2>
 			</div>
 		</div>
 

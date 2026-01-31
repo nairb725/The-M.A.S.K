@@ -1,7 +1,8 @@
 body {
+  position: relative;
   background-color: #1a1a1a;
   color: #fff;
-  font-family: Arial, sans-serif;
+  font-family: Comic Sans MS;
   padding: 20px;
   margin: 0;
   height: 100vh;
@@ -52,7 +53,44 @@ h2 {
   color: #ffd93d;
 }
 
+.popup {
+  position: absolute;
+  transition-duration: 0.4s;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(8px);
+
+  .popup-container {
+    position: absolute;
+    background-color: #fff;
+    max-width: max-content;
+    padding: 1.5rem;
+    border-radius: 15px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    h2 {
+      border-radius: 15px;
+      border: 2px solid #ff6b6b;
+      font-size: 2rem;
+      text-align: center;
+      background-color: #1a1a1a;
+      margin-bottom: 0;
+      padding: 1.25rem;
+    }
+  }
+}
+
 .hidden {
   opacity: 0;
   height: 0;
+}
+
+body div.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
