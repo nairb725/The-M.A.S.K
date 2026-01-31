@@ -42,9 +42,7 @@ io.on("connection", (socket) => {
 		io.emit("updatePlayerList", Array.from(connectedPlayers.values()));
 	});
 });
-server = app.listen(port, () => {
-    console.log(`App running on port ${port}.`);
+
+server.listen(port, () => {
+	console.log("server running at http://localhost:3000");
 });
-// server.listen(port, () => {
-// 	console.log("server running at http://localhost:3000");
-// });
