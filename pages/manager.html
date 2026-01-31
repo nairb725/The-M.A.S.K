@@ -45,15 +45,6 @@
 			const playerListElement = document.getElementById("playerList");
 			const playerCountElement = document.getElementById("playerCount");
 
-			const urlParams = new URLSearchParams(window.location.search);
-			const pseudo = urlParams.get("username");
-
-			if (pseudo) {
-				socket.emit("playerName", pseudo);
-			} else {
-				alert("Aucun nom de minion détecté !");
-			}
-
 			socket.on("updatePlayerList", (players) => {
 				playerListElement.innerHTML = "";
 				playerCountElement.textContent = players.length;
@@ -61,11 +52,6 @@
 				players.forEach((playerName) => {
 					const li = document.createElement("li");
 					li.textContent = playerName;
-
-					if (playerName === pseudo) {
-						li.classList.add("current-player");
-						li.textContent += " (Vous)";
-					}
 
 					playerListElement.appendChild(li);
 				});

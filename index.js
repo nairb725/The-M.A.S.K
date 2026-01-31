@@ -9,8 +9,6 @@ const io = new Server(server);
 
 const connectedPlayers = new Map();
 
-app.use(express.static(__dirname));
-
 app.get("/", (req, res) => {
 	res.sendFile(join(__dirname, "pages/index.html"));
 });
