@@ -15,8 +15,12 @@ app.get("/", (req, res) => {
 	res.sendFile(join(__dirname, "index.html"));
 });
 
-app.get("/test.html", (req, res) => {
-	res.sendFile(join(__dirname, "test.html"));
+app.get("/master", (req, res) => {
+	res.sendFile(join(__dirname, "manager.html"));
+});
+
+app.get("/minion", (req, res) => {
+	res.sendFile(join(__dirname, "pages/servant.html"));
 });
 
 io.on("connection", (socket) => {

@@ -9,8 +9,16 @@
 	<body>
 		<img src="../img/crepe.png" alt="" id="krep" />
 	</body>
+
+	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 	<script>
+		const socket = io();
 		let img = document.getElementById("krep");
+
+		const urlParams = new URLSearchParams(window.location.search);
+		const name = urlParams.get("name");
+		socket.emit("playerName", name);
+
 		document.addEventListener("click", function (e) {
 			console.log("test");
 			const randomSign = () => Math.sign(Math.random() - 0.5);
