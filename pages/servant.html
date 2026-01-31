@@ -18,6 +18,7 @@
 	const socket = io();
 	let img = document.getElementById("krep");
 	let crepeStatus = 1;
+	let crepeTotal;
 	let crepeGiraffeProba = false;
 	let isplaying = false;
 	let banner = document.getElementById('banner')
@@ -36,9 +37,10 @@
 	function click() {
 		if(isplaying == true){
 			crepeStatus++;
-		console.log('crepeStatus');
 
 		if (crepeStatus > 4) {
+			crepeTotal ++;
+			socket.emit("addScore");
 			crepeStatus = 1;
 			crepeGiraffeProba = Math.random() < 1 / 8;
 		}
@@ -60,6 +62,9 @@
 		}
 		
 	}
+	socket.on("startGame", ()=> {
+		isplaying = true;
+	});
 
 	document.addEventListener("click", click);
 </script>
