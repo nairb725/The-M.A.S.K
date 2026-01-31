@@ -13,6 +13,8 @@ let connectedPlayers = [];
 let lastGameStat = [];
 const objective = 1000;
 let isGamePlaying = false;
+let pathArchive = "archive/";
+let firstEater = null;
 
 app.use(express.static(__dirname));
 
@@ -58,8 +60,15 @@ io.on("connection", (socket) => {
 			objective--;
 			connectedPlayers[index] = { id: socket.id, name: connectedPlayers[index].name, score: connectedPlayers[index].score++ };
 			if (objective <= 0) {
-				lastGameStat = connectedPlayers.sort((e1, e2) => e1 < e2);
+				const dataToSave = {
+					firstEater,
+					lastEater: connectedPlayers[index],
+					resumeGame: connectedPlayers,
+				};
 				io.emit("endGame");
+				var dictstring = JSON.stringify(dataToSave);
+				var fs = require("fs");
+				fs.writeFile(pathArchive + "/" + Date.now() + ".json", dictstring);
 				isGamePlaying = false;
 			}
 		}
