@@ -198,3 +198,11 @@ body div.header {
 .titre{
   width: ;
 }
+.button-menu{
+  justify-content: center;
+}
+
+.button-return{
+  padding: 5%;
+    font-size: 1em;
+}
