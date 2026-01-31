@@ -6,6 +6,10 @@
 		<link rel="stylesheet" href="../styles/style.css" />
 		<title>Document</title>
 	</head>
+	<div class="banner blur" id="banner"  style="display: block">
+		<div class="banner-container"> Waiting for other minions</div>
+		</div>
+	</div>
 	<body class="center">
 		<img src="../img/crepe1.png" alt="" id="krep" />
 	</body>
@@ -15,17 +19,23 @@
 	let img = document.getElementById("krep");
 	let crepeStatus = 1;
 	let crepeGiraffeProba = false;
+	let isplaying = false;
+	let banner = document.getElementById('banner')
+
+	//check if we are playing and hide the banner
+	setInterval(function () {
+		if(isplaying == true){
+			banner.style.display = 'none';
+		}
+	}, 1000);
 
 	const urlParams = new URLSearchParams(window.location.search);
 	const name = urlParams.get("name");
 	socket.emit("playerName", name);
 
-	function setup(){
-
-	}
-
 	function click() {
-		crepeStatus++;
+		if(isplaying == true){
+			crepeStatus++;
 		console.log('crepeStatus');
 
 		if (crepeStatus > 4) {
@@ -45,6 +55,10 @@
 
 		img.style.transform =
 			`rotate(${randAngle}deg) translate(${randPosX}%, ${randPosY}%)`;
+		} else{
+
+		}
+		
 	}
 
 	document.addEventListener("click", click);

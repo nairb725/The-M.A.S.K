@@ -118,3 +118,23 @@ body div.header {
 #start-button:hover {
   background-color: #ff6b6b6b;
 }
+
+.banner {
+  position: absolute;
+  transition-duration: 0.4s;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  .banner-container {
+    position: absolute;
+    max-width: max-content;
+    padding: 1.5rem;
+    border-radius: 15px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+  }
+}
