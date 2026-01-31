@@ -27,6 +27,9 @@
 			</div>
 			<button onclick="openPopup()" style="border-radius: 50px">QR Code</button>
 		</div>
+		<div class="flex-center">
+			<button id="start-button" onclick="start()">Start !</button>
+		</div>
 		<ul id="playerList"></ul>
 
 		<div class="popup hidden" id="popup-qr-code" onclick="openPopup()">
@@ -58,6 +61,10 @@
 					playerListElement.appendChild(li);
 				});
 			});
+
+			const start = () => {
+				socket.emit("startGame");
+			};
 		</script>
 	</body>
 </html>

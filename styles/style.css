@@ -11,6 +11,7 @@ body {
 }
 
 body.center {
+  padding: 0;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -53,6 +54,11 @@ h2 {
   color: #ffd93d;
 }
 
+.blur,
+.popup {
+  backdrop-filter: blur(8px);
+}
+
 .popup {
   position: absolute;
   transition-duration: 0.4s;
@@ -60,7 +66,6 @@ h2 {
   width: 100%;
   top: 0;
   left: 0;
-  backdrop-filter: blur(8px);
 
   .popup-container {
     position: absolute;
@@ -84,7 +89,8 @@ h2 {
   }
 }
 
-.hidden {
+.hidden,
+.hidden * {
   opacity: 0;
   height: 0;
 }
@@ -93,4 +99,22 @@ body div.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+#start-button {
+  font-size: 2rem;
+  color: #fff;
+  background-color: #ff6b6b;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  transition-duration: 0.2s;
+}
+
+#start-button:hover {
+  background-color: #ff6b6b6b;
 }
