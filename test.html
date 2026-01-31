@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>The M.A.S.K - Minions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #1a1a1a;
+      color: #fff;
+    }
+    
+    h1 {
+      color: #ff6b6b;
+    }
+    
+    #playerList {
+      list-style: none;
+      padding: 0;
+    }
+    
+    #playerList li {
+      background-color: #2d2d2d;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 5px;
+      border-left: 4px solid #ff6b6b;
+    }
+    
+    .current-player {
+      border-left-color: #4ecdc4;
+      background-color: #2d4d4a;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎭 Minions de The M.A.S.K</h1>
+  <h2>Minions connectés: <span id="playerCount">0</span></h2>
+  <ul id="playerList"></ul>
+
+  <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
+  <script>
+    const socket = io();
+    const playerListElement = document.getElementById('playerList');
+    const playerCountElement = document.getElementById('playerCount');
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const pseudo = urlParams.get('username');
+
+    if (pseudo) {
+      socket.emit("playerName", pseudo);
+    } else {
+      alert("Aucun nom de minion détecté !");
+      window.location.href = '/';
+    }
+
+    socket.on('updatePlayerList', (players) => {
+      playerListElement.innerHTML = '';
+      playerCountElement.textContent = players.length;
+      
+      players.forEach((playerName) => {
+        const li = document.createElement('li');
+        li.textContent = playerName;
+        
+        if (playerName === pseudo) {
+          li.classList.add('current-player');
+          li.textContent += ' (Vous)';
+        }
+        
+        playerListElement.appendChild(li);
+      });
+    });
+  </script>
+</body>
+</html>

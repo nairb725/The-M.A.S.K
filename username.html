@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>The M.A.S.K</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #1a1a1a;
+      color: #fff;
+      text-align: center;
+    }
+    
+    h1 {
+      color: #ff6b6b;
+      font-size: 3em;
+    }
+    
+    h2 {
+      color: #ffd93d;
+    }
+    
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 2px solid #ff6b6b;
+      margin: 10px;
+      background-color: #2d2d2d;
+      color: #fff;
+    }
+    
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #ff6b6b;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #ff5252;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎭 The M.A.S.K</h1>
+  <h2>The Machiavellian orgAnisation that Steal pancakes and Krepes</h2>
+  
+  <input type="text" id="NomDeMinion" placeholder="Nom De Minions">
+  <button onclick="SetNamePlayer()">Valider</button>
+
+  <script>
+    function SetNamePlayer() {
+      const valeur = document.getElementById("NomDeMinion").value.trim();
+
+      if (valeur === "") {
+        alert("Met ton nom de minion !");
+        return;
+      }
+
+      window.location.href = `./test.html?username=${encodeURIComponent(valeur)}`;
+    }
+  </script>
+</body>
+</html>
