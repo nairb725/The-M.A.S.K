@@ -44,7 +44,6 @@ io.on("connection", (socket) => {
 
 	socket.on("playerName", (name) => {
 		console.log("Pseudo reçu:", name);
-		socket.username = name;
 
 		connectedPlayers.push({ id: socket.id, name, score: 0 });
 
