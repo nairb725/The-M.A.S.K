@@ -35,8 +35,8 @@
 				<h2>Sbire connectés: <span id="playerCount">0</span></h2>
 			</div>
 			<h2>
-				Objectives: <br />
-				<span id="current-objective">1000</span> / 1000
+				Objectif: <br />
+				<span id="current-objective">1500</span> / 1500
 			</h2>
 		</div>
 		<div class="flex-center">
@@ -89,7 +89,7 @@
 			});
 
 			socket.on("endGame", (currentDate) => {
-				objective = 1000;
+				objective = 1500;
 				currentObjectiveElt.innerText = objective;
 			});
 
