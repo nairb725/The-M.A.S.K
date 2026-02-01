@@ -2,30 +2,42 @@
 <html class="scrollable">
 	<head>
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
-		<title>The M.A.S.K - Minions</title>
+		<title>The M.A.S.K - Sbire</title>
 		<link rel="stylesheet" href="../styles/style.css" />
 		<style>
 			#playerList {
 				list-style: none;
 				padding: 0;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: flex-start;
 			}
 
 			#playerList li {
 				background-color: #2d2d2d;
-				margin: 10px 0;
+				margin: 5px calc(10% / 18.5);
 				padding: 15px;
 				border-radius: 5px;
 				border-left: 4px solid #ff6b6b;
+				width: 17%;
+				display: flex;
+				justify-content: space-between;
 			}
 		</style>
 	</head>
 	<body>
-		<div class="header">
+		<div class="header master">
 			<div>
-				<h1>🎭 The M.A.S.K - Minions</h1>
-				<h2>Minions connectés: <span id="playerCount">0</span></h2>
+				<button onclick="openPopup()" style="border-radius: 50px">QR Code</button>
 			</div>
-			<button onclick="openPopup()" style="border-radius: 50px">QR Code</button>
+			<div style="flex: 6">
+				<h1>🎭 The M.A.S.K - Sbire</h1>
+				<h2>Sbire connectés: <span id="playerCount">0</span></h2>
+			</div>
+			<h2>
+				Objectives: <br />
+				<span id="current-objective">1000</span> / 1000
+			</h2>
 		</div>
 		<div class="flex-center">
 			<button id="start-button" onclick="start()">Start !</button>
@@ -46,6 +58,9 @@
 			const playerCountElement = document.getElementById("playerCount");
 			const popup = document.getElementById("popup-qr-code");
 
+			const currentObjectiveElt = document.getElementById("current-objective");
+			let objective = currentObjectiveElt.innerText;
+
 			const openPopup = () => {
 				popup.classList.toggle("hidden");
 			};
@@ -65,7 +80,17 @@
 
 			socket.on("updatePlayerScore", (player) => {
 				const e = document.getElementById(`${player.id}-score`);
-				e.innerHTML = player.score;
+				const oldValue = e.innerText;
+				e.innerText = player.score;
+
+				objective = objective - (player.score - oldValue);
+
+				currentObjectiveElt.innerText = objective;
+			});
+
+			socket.on("endGame", (currentDate) => {
+				objective = 1000;
+				currentObjectiveElt.innerText = objective;
 			});
 
 			const start = () => {

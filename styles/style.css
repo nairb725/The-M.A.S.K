@@ -105,8 +105,17 @@ h2 {
 }
 
 body div.header {
-  justify-content: space-between;
   align-items: center;
+
+  &.master {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    &>* {
+      flex: 1 1;
+    }
+  }
 }
 
 .flex-center {
