@@ -20,5 +20,5 @@ Une fois objectif atteinds, compte rendu des scores
 ## Todo
 
 - ~~Charger les 8 images, page servant~~
-- Indiquer score perso, page servant
+- ~~Indiquer score perso, page servant~~
 - Indiquer objectif total, page master

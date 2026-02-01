@@ -34,7 +34,7 @@ body.center img {
 
 body.center:after {
   content: "";
-  background: #ffffffaa;
+  background: #d0d0d081;
   display: block;
   position: absolute;
   /* padding: 0;
@@ -42,7 +42,7 @@ body.center:after {
   opacity: 0;
   padding-top: 300%;
   padding-left: 350%;
-  transition: all 0.4s;
+  transition: all 0.25s;
 }
 
 body.center:active:after {
