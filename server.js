@@ -9,7 +9,7 @@ const io = new Server(server);
 const port = process.env.PORT || 3000;
 
 let connectedPlayers = [];
-let objective = 15;
+let objective = 50;
 let isGamePlaying = false;
 let pathArchive = "archive/";
 let firstEater = null;
@@ -83,7 +83,7 @@ io.on("connection", (socket) => {
 			fs.writeFile(pathArchive + "/" + currentDate + ".json", JSON.stringify(dataToSave), () => {
 				isGamePlaying = false;
 				firstEater = null;
-				objective = 15;
+				objective = 50;
 			});
 		}
 	});
