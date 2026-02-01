@@ -32,29 +32,29 @@
 		<div>
 			<div class="result-pos">
 				Position :
-				<div id="self-position">1er</div>
+				<div id="self-position">--</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="result">
 				Le plus Gourmand :
-				<div id="most-score"></div>
+				<div id="most-score">-</div>
 			</div>
 
 			<div class="result">
 				Première crêpes :
-				<div id="first-eater"></div>
+				<div id="first-eater">-</div>
 			</div>
 		</div>
 		<div class="container">
 			<div class="result">
 				Dernière crêpes :
-				<div id="last-eater"></div>
+				<div id="last-eater">-</div>
 			</div>
 
 			<div class="result">
 				Le moins Gourmand :
-				<div id="worst-score"></div>
+				<div id="worst-score">-</div>
 			</div>
 		</div>
 		<div class="container button-menu">
@@ -70,18 +70,18 @@
 		fetch(`/result?currentDate=${currentDate}`)
 			.then((res) => res.json())
 			.then((dataToSave) => {
-				let resume = dataToSave.resumeGame;
+				const resume = dataToSave.resumeGame;
 				resume.sort((a, b) => {
-					return a.score > b.score;
+					return b.score - a.score;
 				});
-				const firstEater = document.getElementById("first-eater");
-				firstEater.textContent = dataToSave.firstEater.name;
-				const lastEater = document.getElementById("last-eater");
-				lastEater.textContent = dataToSave.lastEater.name;
-				const mostScore = document.getElementById("most-score");
-				mostScore.textContent = resume[0].name;
-				const worstScore = document.getElementById("worst-score");
-				worstScore.textContent = resume[resume.length - 1].name;
+
+				console.log(dataToSave.resumeGame, resume);
+
+				document.getElementById("first-eater").textContent = dataToSave.firstEater.name;
+				document.getElementById("last-eater").textContent = dataToSave.lastEater.name;
+				document.getElementById("most-score").textContent = resume[0].name;
+				document.getElementById("worst-score").textContent = resume[resume.length - 1].name;
+
 				let index = resume.findIndex((e) => {
 					return e.id == id;
 				});

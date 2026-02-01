@@ -13,3 +13,9 @@ Une fois objectif atteinds, compte rendu des scores
 - celui qui a manger la derniere crepe
 - celui qui a manger la premiere crepe
 - celui qui en a le moins manger
+
+### Todo
+
+- Charger les 8 images, page servant
+- Indiquer score perso, page servant
+- Indiquer objectif total, page master

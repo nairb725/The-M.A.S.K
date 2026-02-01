@@ -4,7 +4,7 @@ body {
   color: #fff;
   font-family: Comic Sans MS;
   padding-top: 0%;
-  padding-bottom: 0%;  
+  padding-bottom: 0%;
   padding-left: 5%;
   padding-right: 5%;
   margin: 0;
@@ -27,7 +27,9 @@ body.center img {
   aspect-ratio: 1 / 1;
   object-fit: contain;
 
-  transition: all 0.3s ease-in-out;
+  &:not(.hidden) {
+    transition: all 0.3s ease-in-out;
+  }
 }
 
 body.center:after {
@@ -140,6 +142,7 @@ body div.header {
     font-size: 50px;
   }
 }
+
 .bodyStat {
   max-width: 900px;
   margin: auto;
@@ -163,8 +166,8 @@ body div.header {
   font-weight: bold;
   font-size: 1.2rem;
   text-align: center;
-  padding-top: 5% ;
-  padding-bottom: 5% ;
+  padding-top: 5%;
+  padding-bottom: 5%;
 }
 
 /* CONTENEURS DES RESULTATS */
@@ -195,11 +198,12 @@ body div.header {
     text-align: center;
   }
 }
-.button-menu{
+
+.button-menu {
   justify-content: center;
 }
 
-.button-return{
+.button-return {
   padding: 5%;
-    font-size: 1em;
+  font-size: 1em;
 }

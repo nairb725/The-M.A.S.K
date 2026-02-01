@@ -1,5 +1,4 @@
 const express = require("express");
-const { disconnect } = require("node:cluster");
 const { createServer } = require("node:http");
 const { join } = require("node:path");
 const { Server } = require("socket.io");
@@ -82,13 +81,11 @@ io.on("connection", (socket) => {
 			};
 			const currentDate = Date.now();
 			io.emit("endGame", currentDate);
-			console.log("before write" );
 			fs.writeFile(pathArchive + "/" + currentDate + ".json", JSON.stringify(dataToSave), () => {
-				console.log("In write" );
 				isGamePlaying = false;
 				firstEater = null;
+				objective = 15;
 			});
-			console.log("after write");
 		}
 	});
 
