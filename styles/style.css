@@ -130,6 +130,7 @@ body div.header {
   width: 100%;
   top: 0;
   left: 0;
+  z-index: 2;
 
   .banner-container {
     position: absolute;
@@ -206,4 +207,13 @@ body div.header {
 .button-return {
   padding: 5%;
   font-size: 1em;
+}
+
+.score-container {
+  position: absolute;
+  background-color: #1a1a1aaa;
+  border-radius: 0 0 15px 15px;
+  padding: 1em;
+  font-size: 1.3em;
+  z-index: 1;
 }

@@ -36,6 +36,8 @@
 			<span class="crepeGiraffetkt"></span>
 		</div>
 
+		<div class="score-container">Score: <span id="self-score"> 0 </span></div>
+
 		<!-- Load all images beforehand to prevent the client from requesting all of them to the server -->
 		<img src="../img/crepe1.png" alt="" id="krep1" />
 		<img src="../img/crepe2.png" alt="" id="krep2" class="hidden" />
@@ -49,7 +51,8 @@
 	<script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 	<script>
 		const socket = io();
-		let crepeTotal;
+		let scoreElt = document.getElementById("self-score");
+		let crepeTotal = 0;
 		let crepeGiraffeProba = false;
 		let isplaying = false;
 		let banner = document.getElementById("banner");
@@ -85,9 +88,9 @@
 			if (indexAnim > 3) {
 				crepeTotal++;
 				socket.emit("addScore");
+				scoreElt.innerText = crepeTotal;
 				indexAnim = 0;
 				crepeGiraffeProba = Math.random() < 1 / 8;
-				console.log(crepeGiraffeProba);
 			}
 
 			animCrepe.concat(animCrepeG).forEach((e) => e.classList.add("hidden"));
